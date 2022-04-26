@@ -22,4 +22,10 @@ namespace coup {
         return _players.empty() ? "" : _players[0];
     }
 
+    // helper functions
+
+    void Game::insertPlayer(const std::string &name) {
+        _players.push_back(name); // push back creates a copy of the element
+    }
+
 }

@@ -26,6 +26,9 @@ namespace coup {
 
         std::string winner();
 
+        // helper functions
+
+        void insertPlayer(const std::string& name);
 
     };
 

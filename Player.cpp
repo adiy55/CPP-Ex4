@@ -10,7 +10,9 @@ namespace coup {
 
 
     Player::Player(Game &game, const std::string &name)
-            : _game{game}, _name{name}, _coins{0} {}
+            : _name{name}, _coins{0} {
+        game.insertPlayer(_name);
+    }
 
     /**
      * Take one coin.
@@ -54,7 +56,7 @@ namespace coup {
     }
 
     void Player::checkPositiveBalance() const {
-        if(_coins < 1){
+        if (_coins < 1) {
             throw std::invalid_argument{"Not enough coins!"};
         }
     }
