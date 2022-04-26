@@ -13,13 +13,13 @@ namespace coup {
 
     public:
 
-        Captain(Game& game, const std::string& name);
+        Captain(Game &game, const std::string &name);
 
         std::string role() const override;
 
-        void block(Player& player);
+        void block(Player &player);
 
-        void steal(Player& player);
+        void steal(Player &player);
 
     };
 

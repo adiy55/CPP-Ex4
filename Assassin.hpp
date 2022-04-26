@@ -10,11 +10,11 @@
 
 namespace coup {
 
-    class Assassin: public Player {
+    class Assassin : public Player {
 
     public:
 
-        Assassin(Game& game, const std::string& name);
+        Assassin(Game &game, const std::string &name);
 
         std::string role() const override;
 

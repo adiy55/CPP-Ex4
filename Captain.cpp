@@ -6,14 +6,15 @@
 
 namespace coup {
 
-    Captain::Captain(Game& game, const std::string& name) : Player{game, name} {}
+    Captain::Captain(Game &game, const std::string &name)
+            : Player{game, name} {}
 
     std::string Captain::role() const {
         return "Captain";
     }
 
-    void Captain::block(Player& player) {}
+    void Captain::block(Player &player) {}
 
-    void Captain::steal(Player& player) {}
+    void Captain::steal(Player &player) {}
 
 }

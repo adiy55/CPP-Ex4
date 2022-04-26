@@ -6,12 +6,13 @@
 
 namespace coup {
 
-    Contessa::Contessa(Game& game, const std::string& name) : Player{game, name} {}
+    Contessa::Contessa(Game &game, const std::string &name)
+            : Player{game, name} {}
 
     std::string Contessa::role() const {
         return "Contessa";
     }
 
-    void Contessa::block(Player& player) {}
+    void Contessa::block(Player &player) {}
 
 }

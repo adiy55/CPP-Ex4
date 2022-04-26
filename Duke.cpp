@@ -6,7 +6,8 @@
 
 namespace coup {
 
-    Duke::Duke(Game &game, const std::string &role) : Player{game, role} {}
+    Duke::Duke(Game &game, const std::string &name)
+            : Player{game, name} {}
 
     std::string Duke::role() const {
         return "Duke";
