@@ -11,15 +11,17 @@
 namespace coup {
 
     class Player {
+    private:
+
+        void coupCheckBalance() const;
 
     protected:
+
         Game _game;
         std::string _name;
         int _coins;
 
         Player(Game &game, const std::string &name);
-
-        void checkBalance() const;
 
     public:
 
@@ -32,6 +34,12 @@ namespace coup {
         virtual std::string role() const = 0;
 
         int coins() const;
+
+        // helper functions
+
+        void checkPositiveBalance() const;
+
+        void updateBalance(int coins);
 
     };
 

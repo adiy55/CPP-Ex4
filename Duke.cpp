@@ -22,7 +22,9 @@ namespace coup {
     /**
      * Take 3 coins.
      */
-    void Duke::tax() {}
+    void Duke::tax() {
+        _coins += 3;
+    }
 
 }
 

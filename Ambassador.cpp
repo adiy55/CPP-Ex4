@@ -2,6 +2,7 @@
 // Created by adiya on 4/25/2022.
 //
 
+#include <stdexcept>
 #include "Ambassador.hpp"
 
 namespace coup {
@@ -13,6 +14,10 @@ namespace coup {
         return "Ambassador";
     }
 
-    void Ambassador::transfer(Player &from, Player &to) {}
+    void Ambassador::transfer(Player &from, Player &to) {
+        from.checkPositiveBalance();
+        from.updateBalance(-1);
+        to.updateBalance(1);
+    }
 
 }

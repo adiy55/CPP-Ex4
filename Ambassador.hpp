@@ -11,6 +11,10 @@ namespace coup {
 
     class Ambassador : public Player {
 
+    private:
+        using Player::checkPositiveBalance;
+        using Player::updateBalance;
+
     public:
 
         Ambassador(Game &game, const std::string &name);
