@@ -13,7 +13,7 @@ namespace coup {
     class Player {
 
     protected:
-        Game _game;
+
         std::string _name;
         int _coins;
 
