@@ -19,6 +19,8 @@ namespace coup {
 
         Player(Game &game, const std::string &name);
 
+        void checkBalance() const;
+
     public:
 
         void income();

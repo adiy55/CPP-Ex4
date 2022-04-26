@@ -9,12 +9,19 @@ namespace coup {
     Duke::Duke(Game &game, const std::string &name)
             : Player{game, name} {}
 
-    std::string Duke::role() const {
+    std::string Duke::role() const { // virtual function
         return "Duke";
     }
 
+    /**
+     * Block foreign aid of an opponent player.
+     * @param player
+     */
     void Duke::block(Player &player) {}
 
+    /**
+     * Take 3 coins.
+     */
     void Duke::tax() {}
 
 }
