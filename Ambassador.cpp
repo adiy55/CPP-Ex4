@@ -9,7 +9,7 @@ namespace coup {
     Ambassador::Ambassador(Game &game, const std::string &name)
             : Player{game, name} {}
 
-    std::string Ambassador::role() {
+    std::string Ambassador::role() const {
         return "Ambassador";
     }
 

@@ -18,6 +18,6 @@ namespace coup {
 
     void Player::coup(Player &player) {}
 
-    int Player::coins() { return 0; }
+    int Player::coins() const { return _coins; }
 
 }

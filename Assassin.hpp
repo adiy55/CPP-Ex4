@@ -16,7 +16,7 @@ namespace coup {
 
         Assassin(Game& game, const std::string& name);
 
-        std::string role() override;
+        std::string role() const override;
 
     };
 

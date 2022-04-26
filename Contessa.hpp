@@ -15,7 +15,7 @@ namespace coup {
 
         Contessa(Game& game, const std::string& name);
 
-        std::string role() override;
+        std::string role() const override;
 
         void block(Player& player);
 

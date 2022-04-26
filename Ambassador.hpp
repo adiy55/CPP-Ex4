@@ -15,7 +15,7 @@ namespace coup {
 
         Ambassador(Game& game, const std::string& name);
 
-        std::string role() override;
+        std::string role() const override;
 
         void transfer(Player& from, Player& to);
 

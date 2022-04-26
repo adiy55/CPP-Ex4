@@ -8,7 +8,7 @@ namespace coup {
 
     Captain::Captain(Game& game, const std::string& name) : Player{game, name} {}
 
-    std::string Captain::role() {
+    std::string Captain::role() const {
         return "Captain";
     }
 

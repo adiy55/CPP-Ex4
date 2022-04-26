@@ -8,18 +8,18 @@
 
 namespace coup {
 
-    Game::Game() : _players{} {}
+    Game::Game() : _players{std::vector<std::string>{}} {}
 
     std::string Game::turn() {
-        return {};
+        return _players.empty() ? "" : _players[0];
     }
 
     std::vector<std::string> Game::players() {
-        return {};
+        return _players;
     }
 
     std::string Game::winner() {
-        return {};
+        return _players.empty() ? "" : _players[0];
     }
 
 }
