@@ -10,8 +10,8 @@ namespace coup {
 
 
     Player::Player(Game &game, const std::string &name)
-            : _name{name}, _coins{0} {
-        game.insertPlayer(_name);
+            : _game(game), _name{name}, _coins{0} {
+        _game.insertPlayer(_name);
     }
 
     /**
