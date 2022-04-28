@@ -7,6 +7,7 @@
 
 #include <string>
 #include "Game.hpp"
+#include "Constants.hpp"
 
 namespace coup {
 
@@ -23,6 +24,7 @@ namespace coup {
         Game &_game;
         std::string _name;
         int _coins;
+        int _action;
 
         Player(Game &game, const std::string &name);
 

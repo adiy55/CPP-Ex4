@@ -17,7 +17,10 @@ namespace coup {
      * Block foreign aid of an opponent player.
      * @param player
      */
-    void Duke::block(Player &player) {}
+    void Duke::block(Player &player) {
+        _action = BLOCK;
+        player.updateBalance(-2);
+    }
 
     /**
      * Take 3 coins.

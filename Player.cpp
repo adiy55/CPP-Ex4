@@ -9,7 +9,7 @@
 namespace coup {
 
     Player::Player(Game &game, const std::string &name)
-            : _game(game), _name{name}, _coins{0} {
+            : _game(game), _name{name}, _coins{0}, _action{NONE} {
         _game.insertPlayer(*this);
     }
 
@@ -17,6 +17,7 @@ namespace coup {
      * Take one coin.
      */
     void Player::income() {
+        _action = INCOME;
         ++_coins;
     }
 
@@ -24,6 +25,7 @@ namespace coup {
      * Take two coins.
      */
     void Player::foreign_aid() {
+        _action = FOREIGN_AID;
         _coins += 2;
     }
 
@@ -33,6 +35,7 @@ namespace coup {
      */
     void Player::coup(Player &player) {
         this->coupCheckBalance();
+        _action = COUP;
         _coins -= 7;
 
 

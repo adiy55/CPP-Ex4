@@ -26,6 +26,8 @@ namespace coup {
 
         uint _player_idx;
 
+
+
         void checkWinner() const;
 
     public:

@@ -13,8 +13,12 @@ namespace coup {
         return "Captain";
     }
 
-    void Captain::block(Player &player) {}
+    void Captain::block(Player &player) {
+        _action = BLOCK;
+    }
 
-    void Captain::steal(Player &player) {}
+    void Captain::steal(Player &player) {
+        _action = STEAL;
+    }
 
 }
