@@ -10,7 +10,10 @@
 
 namespace coup {
 
+    class Game; // forward declaration (circular dependency)
+
     class Player {
+
     private:
 
         void coupCheckBalance() const;
@@ -35,7 +38,9 @@ namespace coup {
 
         int coins() const;
 
-        // helper functions
+        // helper functions // todo: check visibility
+
+        std::string getName() const;
 
         void checkPositiveBalance() const;
 

@@ -7,14 +7,26 @@
 
 #include <vector>
 #include <string>
+#include <functional>
+#include "Player.hpp"
+
+typedef unsigned int uint;
 
 namespace coup {
+
+    class Player; // forward declaration (circular dependency)
 
     class Game {
 
     private:
 
-        std::vector<std::string> _players;
+//        std::vector<std::string> _players;
+
+        std::vector<std::reference_wrapper<Player>> _players;
+
+        uint _player_idx;
+
+        void checkWinner() const;
 
     public:
 
@@ -28,7 +40,7 @@ namespace coup {
 
         // helper functions
 
-        void insertPlayer(const std::string& name);
+        void insertPlayer(Player &p);
 
     };
 

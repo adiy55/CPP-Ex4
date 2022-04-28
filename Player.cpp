@@ -8,10 +8,9 @@
 
 namespace coup {
 
-
     Player::Player(Game &game, const std::string &name)
             : _game(game), _name{name}, _coins{0} {
-        _game.insertPlayer(_name);
+        _game.insertPlayer(*this);
     }
 
     /**
@@ -63,6 +62,10 @@ namespace coup {
 
     void Player::updateBalance(int coins) {
         _coins += coins;
+    }
+
+    std::string Player::getName() const {
+        return _name;
     }
 
 }
