@@ -83,15 +83,16 @@ namespace coup {
     }
 
     void Player::blockAction(Player &p, int action) {
-        bool removed = false;
+        bool executed = false;
         func_map executables = p.getExecutables();
         for (auto &[key, value]: executables) {
             if (key == action) {
+                value();
                 executables.erase(key);
-                removed = true;
+                executed = true;
             }
         }
-        if (!removed) {
+        if (!executed) {
             throw std::logic_error{"No action to remove!"};
         }
     }
