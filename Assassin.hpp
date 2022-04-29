@@ -18,6 +18,8 @@ namespace coup {
 
         std::string role() const override;
 
+        int coupCheckBalance() const override;
+
     };
 
 }

@@ -13,6 +13,8 @@ namespace coup {
         return "Contessa";
     }
 
-    void Contessa::block(Player &player) {}
+    void Contessa::block(Player &player) {
+        this->runExecutables();
+    }
 
 }

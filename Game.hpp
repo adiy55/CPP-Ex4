@@ -24,8 +24,6 @@ namespace coup {
 
         uint _player_idx;
 
-
-
         void checkWinner() const;
 
     public:
@@ -41,6 +39,8 @@ namespace coup {
         // helper functions
 
         void insertPlayer(Player &p);
+
+        void removePlayer(Player &p);
 
     };
 

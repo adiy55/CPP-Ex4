@@ -13,4 +13,12 @@ namespace coup {
         return "Assassin";
     }
 
+    int Assassin::coupCheckBalance() const {
+        int cost = 3;
+        if (_coins < cost) {
+            throw std::invalid_argument{"Not enough coins for coup!"};
+        }
+        return cost;
+    }
+
 }

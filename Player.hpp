@@ -6,8 +6,12 @@
 #define CPP_EX4_PLAYER_HPP
 
 #include <string>
+#include <vector>
+#include <functional>
 #include "Game.hpp"
 #include "Constants.hpp"
+
+typedef std::unordered_map<int, std::function<void()>> func_map;
 
 namespace coup {
 
@@ -15,18 +19,17 @@ namespace coup {
 
     class Player {
 
-    private:
-
-        void coupCheckBalance() const;
-
     protected:
 
         Game &_game;
         std::string _name;
         int _coins;
-        int _action;
+        int _action; // enum from Constants.hpp
+        func_map _executables;
 
         Player(Game &game, const std::string &name);
+
+        virtual int coupCheckBalance() const;
 
     public:
 
@@ -46,7 +49,11 @@ namespace coup {
 
         void checkPositiveBalance() const;
 
-        void updateBalance(int coins);
+        void updateCoins(int coins);
+
+        func_map &getExecutables();
+
+        void runExecutables();
 
     };
 

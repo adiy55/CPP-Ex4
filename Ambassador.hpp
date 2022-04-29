@@ -13,7 +13,7 @@ namespace coup {
 
     private:
         using Player::checkPositiveBalance;
-        using Player::updateBalance;
+        using Player::updateCoins;
 
     public:
 

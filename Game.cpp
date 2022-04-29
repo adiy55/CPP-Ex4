@@ -11,8 +11,8 @@ namespace coup {
             : _players{}, _player_idx{0} {}
 
     std::string Game::turn() {
-        _player_idx =  _player_idx % _players.size();
-        return _players[_player_idx++].get().role();
+//        _player_idx =  _player_idx % _players.size();
+        return _players[_player_idx].get().getName();
     }
 
     std::vector<std::string> Game::players() {
@@ -39,6 +39,14 @@ namespace coup {
         }
         if (_players.empty()) {
             throw std::length_error{"There are no players in the game!"};
+        }
+    }
+
+    void Game::removePlayer(Player &p) {
+        for (uint i = 0; i < _players.size(); i++) {
+            if (&_players[i].get() == &p) {
+                _players.erase(_players.begin() + i);
+            }
         }
     }
 

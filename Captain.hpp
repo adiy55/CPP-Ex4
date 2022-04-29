@@ -10,6 +10,9 @@
 namespace coup {
 
     class Captain : public Player {
+    private:
+
+        static void validateSteal(Player &p) ;
 
     public:
 

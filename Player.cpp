@@ -6,10 +6,12 @@
 #include "Player.hpp"
 #include "Game.hpp"
 
+typedef std::unordered_map<int, std::function<void()>> func_map;
+
 namespace coup {
 
     Player::Player(Game &game, const std::string &name)
-            : _game(game), _name{name}, _coins{0}, _action{NONE} {
+            : _game{game}, _name{name}, _coins{0}, _action{NONE}, _executables{} {
         _game.insertPlayer(*this);
     }
 
@@ -17,16 +19,17 @@ namespace coup {
      * Take one coin.
      */
     void Player::income() {
-        _action = INCOME;
-        ++_coins;
+        this->runExecutables();
+//        _executables[INCOME] = {[this] { updateCoins(1); }};
+        this->updateCoins(1);
     }
 
     /**
      * Take two coins.
      */
     void Player::foreign_aid() {
-        _action = FOREIGN_AID;
-        _coins += 2;
+        this->runExecutables();
+        _executables[FOREIGN_AID] = {[this] { updateCoins(2); }};
     }
 
     /**
@@ -34,11 +37,12 @@ namespace coup {
      * @param player
      */
     void Player::coup(Player &player) {
-        this->coupCheckBalance();
-        _action = COUP;
-        _coins -= 7;
-
-
+        this->runExecutables();
+        int cost = this->coupCheckBalance();
+        _executables[COUP] = {[this, &player, cost] {
+            _game.removePlayer(player); // todo: run executables before removing?
+            this->updateCoins(-cost);
+        }};
     }
 
     /**
@@ -50,11 +54,12 @@ namespace coup {
 
     // helper functions
 
-    void Player::coupCheckBalance() const {
-        int balance = this->role() == "Assassin" ? 3 : 7;
-        if (_coins < balance) {
+    int Player::coupCheckBalance() const {
+        int cost = 7;
+        if (_coins < cost) {
             throw std::invalid_argument{"Not enough coins for coup!"};
         }
+        return cost;
     }
 
     void Player::checkPositiveBalance() const {
@@ -63,12 +68,23 @@ namespace coup {
         }
     }
 
-    void Player::updateBalance(int coins) {
+    void Player::updateCoins(int coins) {
         _coins += coins;
     }
 
     std::string Player::getName() const {
         return _name;
+    }
+
+    func_map &Player::getExecutables() {
+        return _executables;
+    }
+
+    void Player::runExecutables() {
+        for (auto &[key, value]: _executables) {
+            value();
+        }
+        _executables = {};
     }
 
 }
