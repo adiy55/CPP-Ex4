@@ -18,21 +18,14 @@ namespace coup {
      * @param player
      */
     void Duke::block(Player &player) {
-        this->runExecutables();
-        func_map &executables = player.getExecutables();
-        for (auto &[key, value]: executables) {
-            if (key == FOREIGN_AID) {
-                executables.erase(key);
-            }
-        }
-        player.updateCoins(-2);
+        blockAction(player, FOREIGN_AID_BLOCK);
     }
 
     /**
      * Take 3 coins.
      */
     void Duke::tax() {
-        this->runExecutables();
+        this->setupTurn();
         this->updateCoins(3);
     }
 

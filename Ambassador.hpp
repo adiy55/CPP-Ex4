@@ -23,6 +23,8 @@ namespace coup {
 
         void transfer(Player &from, Player &to);
 
+        void block(Player &player);
+
     };
 
 }

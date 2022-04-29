@@ -40,7 +40,11 @@ namespace coup {
 
         void insertPlayer(Player &p);
 
-        void removePlayer(Player &p);
+        void insertPlayer(Player &p, int index);
+
+        int removePlayer(Player &p);
+
+        void incrementTurn();
 
     };
 

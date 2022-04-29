@@ -11,7 +11,7 @@ typedef std::unordered_map<int, std::function<void()>> func_map;
 namespace coup {
 
     Player::Player(Game &game, const std::string &name)
-            : _game{game}, _name{name}, _coins{0}, _action{NONE}, _executables{} {
+            : _game{game}, _name{name}, _coins{0}, _executables{} {
         _game.insertPlayer(*this);
     }
 
@@ -19,8 +19,7 @@ namespace coup {
      * Take one coin.
      */
     void Player::income() {
-        this->runExecutables();
-//        _executables[INCOME] = {[this] { updateCoins(1); }};
+        this->setupTurn();
         this->updateCoins(1);
     }
 
@@ -28,8 +27,9 @@ namespace coup {
      * Take two coins.
      */
     void Player::foreign_aid() {
-        this->runExecutables();
-        _executables[FOREIGN_AID] = {[this] { updateCoins(2); }};
+        this->setupTurn();
+        this->updateCoins(2);
+        _executables[FOREIGN_AID_BLOCK] = {[this] { updateCoins(-2); }};
     }
 
     /**
@@ -37,11 +37,13 @@ namespace coup {
      * @param player
      */
     void Player::coup(Player &player) {
-        this->runExecutables();
+        this->setupTurn();
         int cost = this->coupCheckBalance();
-        _executables[COUP] = {[this, &player, cost] {
-            _game.removePlayer(player); // todo: run executables before removing?
-            this->updateCoins(-cost);
+        this->updateCoins(-cost);
+        int player_index = _game.removePlayer(player); // todo: check -1?
+        _game.removePlayer(player);
+        _executables[COUP_RECOVER] = {[&player, player_index] {
+            player._game.insertPlayer(player, player_index);
         }};
     }
 
@@ -80,11 +82,26 @@ namespace coup {
         return _executables;
     }
 
-    void Player::runExecutables() {
-        for (auto &[key, value]: _executables) {
-            value();
+    void Player::blockAction(Player &p, int action) {
+        bool removed = false;
+        func_map executables = p.getExecutables();
+        for (auto &[key, value]: executables) {
+            if (key == action) {
+                executables.erase(key);
+                removed = true;
+            }
+        }
+        if (!removed) {
+            throw std::logic_error{"No action to remove!"};
+        }
+    }
+
+    void Player::setupTurn() {
+        if (_name != _game.turn()) {
+            if (_game.turn() != _name) { throw std::runtime_error{"Not your turn!"}; }
         }
         _executables = {};
+        _game.incrementTurn();
     }
 
 }

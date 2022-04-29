@@ -14,27 +14,23 @@ namespace coup {
     }
 
     void Captain::block(Player &player) {
-        this->runExecutables();
-        func_map executables = player.getExecutables();
-        for (auto &[key, value]: executables) {
-            if (key == STEAL) {
-                executables.erase(key);
-            }
-        }
+        blockAction(player, STEAL_BLOCK);
     }
 
     void Captain::steal(Player &player) {
-        this->runExecutables();
+        this->setupTurn();
         validateSteal(player);
-        _executables[STEAL] = {[this, &player] {
-            player.updateCoins(-2);
-            this->updateCoins(2);
+        player.updateCoins(-2);
+        this->updateCoins(2);
+        _executables[STEAL_BLOCK] = {[this, &player] {
+            player.updateCoins(2);
+            this->updateCoins(-2);
         }};
     }
 
     void Captain::validateSteal(Player &p) {
         if (p.coins() < 2) {
-            throw std::invalid_argument{"Not enough coins to steal!"};
+            throw std::invalid_argument{"Not enough coins to steal from player!"};
         }
     }
 

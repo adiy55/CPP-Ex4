@@ -24,7 +24,6 @@ namespace coup {
         Game &_game;
         std::string _name;
         int _coins;
-        int _action; // enum from Constants.hpp
         func_map _executables;
 
         Player(Game &game, const std::string &name);
@@ -53,7 +52,9 @@ namespace coup {
 
         func_map &getExecutables();
 
-        void runExecutables();
+        void setupTurn();
+
+        static void blockAction(Player &p, int action);
 
     };
 

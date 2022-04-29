@@ -7,17 +7,11 @@
 
 enum Actions {
 
-    NONE, // for initializing player (before game starts)
+    FOREIGN_AID_BLOCK, // Duke
 
-    INCOME, FOREIGN_AID, COUP,  // Player
+    STEAL_BLOCK, // Ambassador, Captain
 
-    TRANSFER, // Ambassador
-
-    BLOCK, // Captain, Contessa, Duke
-
-    STEAL,  // Captain
-
-    TAX // Duke
+    COUP_RECOVER, // Contessa
 
 };
 

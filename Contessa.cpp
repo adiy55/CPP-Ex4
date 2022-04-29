@@ -14,7 +14,7 @@ namespace coup {
     }
 
     void Contessa::block(Player &player) {
-        this->runExecutables();
+        blockAction(player, COUP_RECOVER);
     }
 
 }

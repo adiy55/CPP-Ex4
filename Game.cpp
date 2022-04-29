@@ -11,7 +11,6 @@ namespace coup {
             : _players{}, _player_idx{0} {}
 
     std::string Game::turn() {
-//        _player_idx =  _player_idx % _players.size();
         return _players[_player_idx].get().getName();
     }
 
@@ -33,6 +32,10 @@ namespace coup {
         // in this case the object is: std::reference_wrapper<Player>
     }
 
+    void Game::insertPlayer(Player &p, int index) {
+        _players.insert(_players.begin() + index, p);
+    }
+
     void Game::checkWinner() const {
         if (_players.size() > 1) {
             throw std::range_error{"The game has not ended!"};
@@ -42,12 +45,17 @@ namespace coup {
         }
     }
 
-    void Game::removePlayer(Player &p) {
+    int Game::removePlayer(Player &p) {
         for (uint i = 0; i < _players.size(); i++) {
             if (&_players[i].get() == &p) {
                 _players.erase(_players.begin() + i);
+                return static_cast<int>(i);
             }
         }
+        return -1;
     }
 
+    void Game::incrementTurn() {
+        _player_idx = ++_player_idx % _players.size();
+    }
 }
