@@ -11,23 +11,19 @@ namespace coup {
             : _players{}, _player_idx{0} {}
 
     std::string Game::turn() {
-        if (_players.size() == _player_idx) {
-            _player_idx = 0;
-        }
-        Player &p = _players[_player_idx++];
-        return p.role();
+        _player_idx =  _player_idx % _players.size();
+        return _players[_player_idx++].get().role();
     }
 
     std::vector<std::string> Game::players() {
         std::vector<std::string> names;
-        std::for_each(_players.begin(), _players.end(), [&names](Player &p) { names.push_back(p.getName()); });
+        std::for_each(_players.begin(), _players.end(), [&names](const Player &p) { names.push_back(p.getName()); });
         return names;
     }
 
     std::string Game::winner() {
         Game::checkWinner();
-        Player &p = _players[0];
-        return p.getName();
+        return _players[0].get().getName();
     }
 
     // helper functions

@@ -20,8 +20,6 @@ namespace coup {
 
     private:
 
-//        std::vector<std::string> _players;
-
         std::vector<std::reference_wrapper<Player>> _players;
 
         uint _player_idx;
