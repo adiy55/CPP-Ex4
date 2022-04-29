@@ -6,7 +6,7 @@
 #include "Player.hpp"
 #include "Game.hpp"
 
-typedef std::unordered_map<int, std::function<void()>> func_map;
+typedef std::unordered_map<int, std::function<void()>> func_map; // todo: void?
 
 namespace coup {
 
@@ -57,7 +57,7 @@ namespace coup {
     // helper functions
 
     int Player::coupCheckBalance() const {
-        int cost = this->getCoupPrice();
+        int cost = this->getCoupPrice(); // call virtual function
         if (_coins < cost) {
             throw std::invalid_argument{"Not enough coins for coup!"};
         }
@@ -87,25 +87,19 @@ namespace coup {
     }
 
     void Player::blockAction(Player &p, int action) {
-        bool executed = false;
-        func_map executables = p.getExecutables();
-        for (auto &[key, value]: executables) {
-            if (key == action) {
-                value();
-                executables.erase(key);
-                executed = true;
-            }
-        }
-        if (!executed) {
+        func_map &executables = p.getExecutables();
+        if (executables.count(action) != 1) {
             throw std::logic_error{"No action to remove!"};
         }
+        executables[action]();
+        executables.erase(action);
     }
 
     void Player::setupTurn() {
         if (_name != _game.turn()) {
             if (_game.turn() != _name) { throw std::runtime_error{"Not your turn!"}; }
         }
-        _executables = {};
+        if (!_executables.empty()) { _executables = {}; }
         _game.incrementTurn();
     }
 
