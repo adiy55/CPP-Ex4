@@ -7,11 +7,11 @@
 
 enum Actions {
 
-    FOREIGN_AID_BLOCK, // Duke
+    BLOCK_FOREIGN_AID, // Duke
 
-    STEAL_BLOCK, // Ambassador, Captain
+    BLOCK_STEAL, // Ambassador, Captain
 
-    COUP_RECOVER, // Contessa
+    COUP_RECOVER_PLAYER // Contessa
 
 };
 

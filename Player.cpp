@@ -29,7 +29,7 @@ namespace coup {
     void Player::foreign_aid() {
         this->setupTurn();
         this->updateCoins(2);
-        _executables[FOREIGN_AID_BLOCK] = {[this] { updateCoins(-2); }};
+        _executables[BLOCK_FOREIGN_AID] = {[this] { updateCoins(-2); }};
     }
 
     /**
@@ -42,7 +42,7 @@ namespace coup {
         this->updateCoins(-cost);
         int player_index = _game.removePlayer(player); // todo: check -1?
         _game.removePlayer(player);
-        _executables[COUP_RECOVER] = {[&player, player_index] {
+        _executables[COUP_RECOVER_PLAYER] = {[&player, player_index] {
             player._game.insertPlayer(player, player_index);
         }};
     }

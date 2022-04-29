@@ -18,7 +18,7 @@ namespace coup {
      * @param player
      */
     void Duke::block(Player &player) {
-        blockAction(player, FOREIGN_AID_BLOCK);
+        blockAction(player, BLOCK_FOREIGN_AID);
     }
 
     /**

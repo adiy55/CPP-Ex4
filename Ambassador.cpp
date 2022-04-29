@@ -22,7 +22,7 @@ namespace coup {
     }
 
     void Ambassador::block(Player &player) {
-        blockAction(player, STEAL_BLOCK);
+        blockAction(player, BLOCK_STEAL);
     }
 
 }

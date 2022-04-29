@@ -14,7 +14,7 @@ namespace coup {
     }
 
     void Captain::block(Player &player) {
-        blockAction(player, STEAL_BLOCK);
+        blockAction(player, BLOCK_STEAL);
     }
 
     void Captain::steal(Player &player) {
@@ -22,7 +22,7 @@ namespace coup {
         validateSteal(player);
         player.updateCoins(-2);
         this->updateCoins(2);
-        _executables[STEAL_BLOCK] = {[this, &player] {
+        _executables[BLOCK_STEAL] = {[this, &player] {
             player.updateCoins(2);
             this->updateCoins(-2);
         }};
