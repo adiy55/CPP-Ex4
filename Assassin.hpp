@@ -12,13 +12,15 @@ namespace coup {
 
     class Assassin : public Player {
 
+        const int _assassin_coup_price{3};
+
     public:
 
         Assassin(Game &game, const std::string &name);
 
         std::string role() const override;
 
-        int coupCheckBalance() const override;
+        int getCoupPrice() const override;
 
     };
 

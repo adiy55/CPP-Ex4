@@ -57,11 +57,15 @@ namespace coup {
     // helper functions
 
     int Player::coupCheckBalance() const {
-        int cost = 7;
+        int cost = this->getCoupPrice();
         if (_coins < cost) {
             throw std::invalid_argument{"Not enough coins for coup!"};
         }
         return cost;
+    }
+
+    int Player::getCoupPrice() const {
+        return _regular_coup_price;
     }
 
     void Player::checkPositiveBalance() const {

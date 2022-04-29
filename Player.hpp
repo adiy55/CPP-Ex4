@@ -18,6 +18,9 @@ namespace coup {
     class Game; // forward declaration (circular dependency)
 
     class Player {
+    private:
+
+        const int _regular_coup_price{3};
 
     protected:
 
@@ -28,7 +31,9 @@ namespace coup {
 
         Player(Game &game, const std::string &name);
 
-        virtual int coupCheckBalance() const;
+        int coupCheckBalance() const;
+
+        virtual int getCoupPrice() const;
 
     public:
 
