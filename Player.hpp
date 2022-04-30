@@ -43,13 +43,13 @@ namespace coup {
 
         void foreign_aid();
 
-        void coup(Player &player);
+        virtual void coup(Player &player);
 
         virtual std::string role() const = 0;
 
         int coins() const;
 
-        // helper functions // todo: check visibility
+        // helper functions
 
         std::string getName() const;
 

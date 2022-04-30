@@ -8,7 +8,7 @@
 namespace coup {
 
     Game::Game()
-            : _players{}, _player_idx{0} {}
+            : _players{}, _player_idx{0}, _erased_player_idx{-1} {}
 
     std::string Game::turn() {
         return _players[_player_idx].get().getName();
@@ -45,22 +45,33 @@ namespace coup {
         }
     }
 
-    int Game::removePlayer(Player &p) {
+    void Game::removePlayer(Player &p) {
+        bool erased = false;
         for (uint i = 0; i < _players.size(); i++) {
             if (&_players[i].get() == &p) {
                 _players.erase(_players.begin() + i);
+                erased = true;
                 if (_player_idx - 1 > i) { // remove player before current index
                     --_player_idx;
                 } else { // remove player after current index
                     _player_idx = _player_idx % _players.size();
                 }
-                return static_cast<int>(i);
+                _erased_player_idx = static_cast<int>(i);
             }
         }
-        return -1;
+        if (!erased) {
+            throw std::runtime_error{"Could not find player to remove!"};
+        }
     }
 
     void Game::incrementTurn() {
         _player_idx = ++_player_idx % _players.size();
+    }
+
+    int Game::getErasedPlayerIndex() const {
+        if (_erased_player_idx < 0) {
+            throw std::out_of_range{"Invalid index- out of bounds!"};
+        }
+        return _erased_player_idx;
     }
 }

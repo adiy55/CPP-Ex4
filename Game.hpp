@@ -24,6 +24,8 @@ namespace coup {
 
         uint _player_idx;
 
+        int _erased_player_idx;
+
         void checkWinner() const;
 
     public:
@@ -42,9 +44,11 @@ namespace coup {
 
         void insertPlayer(Player &p, int index);
 
-        int removePlayer(Player &p);
+        void removePlayer(Player &p);
 
         void incrementTurn();
+
+        int getErasedPlayerIndex() const;
 
     };
 

@@ -17,4 +17,12 @@ namespace coup {
         return _assassin_coup_price;
     }
 
+    void Assassin::coup(Player &player) {
+        Player::coup(player);
+        int player_index = _game.getErasedPlayerIndex();
+        _executables[COUP_RECOVER_PLAYER] = {[this, &player, player_index] {
+            _game.insertPlayer(player, player_index);
+        }};
+    }
+
 }

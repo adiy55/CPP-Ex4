@@ -31,6 +31,8 @@ namespace coup {
 
         int getCoupPrice() const override;
 
+        void coup(Player &player) override;
+
     };
 
 }

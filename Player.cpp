@@ -40,13 +40,7 @@ namespace coup {
         this->setupTurn();
         int cost = this->coupCheckBalance();
         this->updateCoins(-cost);
-        int player_index = _game.removePlayer(player);
-        if (player_index == -1) { throw std::runtime_error{"Could not find player to remove!"}; }
-        if (this->role() == "Assassin") {
-            _executables[COUP_RECOVER_PLAYER] = {[&player, player_index] {
-                player._game.insertPlayer(player, player_index);
-            }};
-        }
+        _game.removePlayer(player);
     }
 
     /**
@@ -61,7 +55,7 @@ namespace coup {
     int Player::coupCheckBalance() const {
         int cost = this->getCoupPrice(); // call virtual function
         if (_coins < cost) {
-            throw std::invalid_argument{"Not enough coins for coup!"};
+            throw std::logic_error{"Not enough coins for coup!"};
         }
         return cost;
     }
@@ -72,7 +66,7 @@ namespace coup {
 
     void Player::checkPositiveBalance() const {
         if (_coins < 1) {
-            throw std::invalid_argument{"Not enough coins!"};
+            throw std::logic_error{"Not enough coins!"};
         }
     }
 
@@ -91,7 +85,7 @@ namespace coup {
     void Player::blockAction(Player &p, int action) {
         func_map &executables = p.getExecutables();
         if (executables.count(action) != 1) {
-            throw std::logic_error{"No action to remove!"};
+            throw std::invalid_argument{"No action to remove!"};
         }
         executables[action]();
         executables.erase(action);
