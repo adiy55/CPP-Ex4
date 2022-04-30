@@ -2,7 +2,7 @@
 #include "Player.hpp"
 #include "Game.hpp"
 
-typedef std::unordered_map<int, std::function<void()>> func_map; // todo: void?
+typedef std::unordered_map<int, std::function<void()>> func_map;
 
 namespace coup {
 

@@ -28,6 +28,4 @@ namespace coup {
         if (this == &from || this == &to || &from == &to) { throw std::invalid_argument{"Invalid transfer!"}; }
     }
 
-    void Ambassador::block(Player &player) {}
-
 }
