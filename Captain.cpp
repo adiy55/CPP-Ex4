@@ -13,19 +13,21 @@ namespace coup {
         return "Captain";
     }
 
-    void Captain::block(Player &player) { // todo: check this != player
-        blockAction(player, BLOCK_STEAL);
+    void Captain::block(Player &player) {
+        this->blockAction(player, BLOCK_STEAL);
     }
 
     void Captain::steal(Player &player) {
-        this->setupTurn();
-        validateSteal(player);
-        player.updateCoins(-2);
-        this->updateCoins(2);
-        _executables[BLOCK_STEAL] = {[this, &player] {
-            player.updateCoins(2);
-            this->updateCoins(-2);
-        }};
+        this->turnWrapper([this, &player] {
+            this->checkCoupNecessary();
+            validateSteal(player);
+            player.updateCoins(-2);
+            this->updateCoins(2);
+            _executables[BLOCK_STEAL] = {[this, &player] {
+                player.updateCoins(2);
+                this->updateCoins(-2);
+            }};
+        });
     }
 
     void Captain::validateSteal(Player &p) {

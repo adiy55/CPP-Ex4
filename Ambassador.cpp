@@ -15,10 +15,12 @@ namespace coup {
     }
 
     void Ambassador::transfer(Player &from, Player &to) {
-        this->setupTurn();
-        from.checkPositiveBalance();
-        from.updateCoins(-1);
-        to.updateCoins(1);
+        this->turnWrapper([this, &from, &to] {
+            this->checkCoupNecessary();
+            from.checkPositiveBalance();
+            from.updateCoins(-1);
+            to.updateCoins(1);
+        });
     }
 
     void Ambassador::block(Player &player) {

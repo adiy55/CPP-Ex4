@@ -14,7 +14,7 @@ namespace coup {
     }
 
     void Contessa::block(Player &player) {
-        blockAction(player, COUP_RECOVER_PLAYER);
+        this->blockAction(player, COUP_RECOVER_PLAYER);
     }
 
 }

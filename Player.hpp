@@ -11,6 +11,8 @@
 #include "Game.hpp"
 #include "Constants.hpp"
 
+typedef unsigned int uint;
+
 typedef std::unordered_map<int, std::function<void()>> func_map;
 
 namespace coup {
@@ -35,7 +37,13 @@ namespace coup {
 
         virtual int getCoupPrice() const;
 
-        static void blockAction(Player &p, int action);
+        void blockAction(Player &p, int action);
+
+        void turnWrapper(const std::function<void()> &function);
+
+        void checkCoupNecessary() const;
+
+        uint basic_coup(Player &player);
 
     public:
 
@@ -58,8 +66,6 @@ namespace coup {
         void updateCoins(int coins);
 
         func_map &getExecutables();
-
-        void setupTurn();
 
     };
 

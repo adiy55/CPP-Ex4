@@ -7,6 +7,7 @@
 #include "Game.hpp"
 
 typedef std::unordered_map<int, std::function<void()>> func_map; // todo: void?
+typedef std::initializer_list<std::function<void()>> func_list;
 
 namespace coup {
 
@@ -19,17 +20,21 @@ namespace coup {
      * Take one coin.
      */
     void Player::income() {
-        this->setupTurn();
-        this->updateCoins(1);
+        this->turnWrapper([this] {
+            this->checkCoupNecessary();
+            this->updateCoins(1);
+        });
     }
 
     /**
      * Take two coins.
      */
     void Player::foreign_aid() {
-        this->setupTurn();
-        this->updateCoins(2);
-        _executables[BLOCK_FOREIGN_AID] = {[this] { updateCoins(-2); }};
+        this->turnWrapper([this] {
+            this->checkCoupNecessary();
+            this->updateCoins(2);
+            _executables[BLOCK_FOREIGN_AID] = {[this] { updateCoins(-2); }};
+        });
     }
 
     /**
@@ -37,10 +42,9 @@ namespace coup {
      * @param player
      */
     void Player::coup(Player &player) {
-        this->setupTurn();
-        int cost = this->coupCheckBalance();
-        this->updateCoins(-cost);
-        _game.removePlayer(player);
+        this->turnWrapper([this, &player] {
+            this->basic_coup(player);
+        });
     }
 
     /**
@@ -52,11 +56,34 @@ namespace coup {
 
     // helper functions
 
+    uint Player::basic_coup(Player &player) {
+        int cost = this->coupCheckBalance();
+        this->updateCoins(-cost);
+        return _game.removePlayer(player);
+    }
+
+    void Player::blockAction(Player &p, int action) {
+        if (this == &p) { throw std::invalid_argument{"Can not block yourself!"}; }
+        func_map &executables = p.getExecutables();
+        if (executables.count(action) != 1) { throw std::invalid_argument{"No action to remove!"}; }
+        executables[action]();
+        executables.erase(action);
+    }
+
+    void Player::turnWrapper(const std::function<void()> &func) {
+        if (_name != _game.turn()) { throw std::runtime_error{"Not your turn!"}; }
+        if (!_executables.empty()) { _executables = {}; }
+        func();
+        _game.incrementTurn();
+    }
+
+    void Player::checkCoupNecessary() const {
+        if (_coins > 10) { throw std::runtime_error{"Player has to coup! Has 10 or more coins!"}; }
+    }
+
     int Player::coupCheckBalance() const {
         int cost = this->getCoupPrice(); // call virtual function
-        if (_coins < cost) {
-            throw std::logic_error{"Not enough coins for coup!"};
-        }
+        if (_coins < cost) { throw std::logic_error{"Not enough coins for coup!"}; }
         return cost;
     }
 
@@ -65,9 +92,7 @@ namespace coup {
     }
 
     void Player::checkPositiveBalance() const {
-        if (_coins < 1) {
-            throw std::logic_error{"Not enough coins!"};
-        }
+        if (_coins < 1) { throw std::logic_error{"Not enough coins!"}; }
     }
 
     void Player::updateCoins(int coins) {
@@ -80,23 +105,6 @@ namespace coup {
 
     func_map &Player::getExecutables() {
         return _executables;
-    }
-
-    void Player::blockAction(Player &p, int action) {
-        func_map &executables = p.getExecutables();
-        if (executables.count(action) != 1) {
-            throw std::invalid_argument{"No action to remove!"};
-        }
-        executables[action]();
-        executables.erase(action);
-    }
-
-    void Player::setupTurn() {
-        if (_name != _game.turn()) {
-            if (_game.turn() != _name) { throw std::runtime_error{"Not your turn!"}; }
-        }
-        if (!_executables.empty()) { _executables = {}; }
-        _game.incrementTurn();
     }
 
 }

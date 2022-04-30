@@ -19,7 +19,7 @@ namespace coup {
         using Player::checkPositiveBalance;
         using Player::updateCoins;
         using Player::getExecutables;
-        using Player::setupTurn;
+        using Player::turnWrapper;
 
     public:
 

@@ -25,8 +25,10 @@ namespace coup {
      * Take 3 coins.
      */
     void Duke::tax() {
-        this->setupTurn();
-        this->updateCoins(3);
+        this->turnWrapper([this] {
+            this->checkCoupNecessary();
+            this->updateCoins(3);
+        });
     }
 
 }

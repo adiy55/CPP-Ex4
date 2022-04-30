@@ -18,11 +18,12 @@ namespace coup {
     }
 
     void Assassin::coup(Player &player) {
-        Player::coup(player);
-        int player_index = _game.getErasedPlayerIndex();
-        _executables[COUP_RECOVER_PLAYER] = {[this, &player, player_index] {
-            _game.insertPlayer(player, player_index);
-        }};
+        this->turnWrapper([this, &player] {
+            uint player_index = this->basic_coup(player);
+            _executables[COUP_RECOVER_PLAYER] = {[this, &player, player_index] {
+                _game.insertPlayer(player, player_index);
+            }};
+        });
     }
 
 }
