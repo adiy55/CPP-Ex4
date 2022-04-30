@@ -15,4 +15,6 @@ namespace coup {
 
     void Ambassador::transfer(Player &from, Player &to) {}
 
+    void Ambassador::block(Player &player) {}
+
 }

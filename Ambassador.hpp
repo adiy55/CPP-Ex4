@@ -1,7 +1,3 @@
-//
-// Created by adiya on 4/25/2022.
-//
-
 #ifndef CPP_EX4_AMBASSADOR_HPP
 #define CPP_EX4_AMBASSADOR_HPP
 
@@ -18,6 +14,8 @@ namespace coup {
         std::string role() const override;
 
         void transfer(Player &from, Player &to);
+
+        void block(Player &player);
 
     };
 

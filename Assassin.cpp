@@ -13,4 +13,8 @@ namespace coup {
         return "Assassin";
     }
 
+    void Assassin::coup(Player &player) {
+        Player::coup(player);
+    }
+
 }
