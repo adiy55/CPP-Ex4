@@ -49,6 +49,11 @@ namespace coup {
         for (uint i = 0; i < _players.size(); i++) {
             if (&_players[i].get() == &p) {
                 _players.erase(_players.begin() + i);
+                if (_player_idx - 1 > i) { // remove player before current index
+                    --_player_idx;
+                } else { // remove player after current index
+                    _player_idx = _player_idx % _players.size();
+                }
                 return static_cast<int>(i);
             }
         }

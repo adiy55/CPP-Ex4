@@ -40,8 +40,8 @@ namespace coup {
         this->setupTurn();
         int cost = this->coupCheckBalance();
         this->updateCoins(-cost);
-        int player_index = _game.removePlayer(player); // todo: check -1?
-        _game.removePlayer(player);
+        int player_index = _game.removePlayer(player);
+        if (player_index == -1) { throw std::runtime_error{"Could not find player to remove!"}; }
         _executables[COUP_RECOVER_PLAYER] = {[&player, player_index] {
             player._game.insertPlayer(player, player_index);
         }};
