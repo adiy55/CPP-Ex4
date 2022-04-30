@@ -1,7 +1,3 @@
-//
-// Created by adiya on 4/28/2022.
-//
-
 #ifndef CPP_EX4_CONSTANTS_HPP
 #define CPP_EX4_CONSTANTS_HPP
 

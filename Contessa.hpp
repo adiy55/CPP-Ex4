@@ -1,7 +1,3 @@
-//
-// Created by adiya on 4/25/2022.
-//
-
 #ifndef CPP_EX4_CONTESSA_HPP
 #define CPP_EX4_CONTESSA_HPP
 

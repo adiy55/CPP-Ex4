@@ -7,7 +7,6 @@
 #include "Game.hpp"
 
 typedef std::unordered_map<int, std::function<void()>> func_map; // todo: void?
-typedef std::initializer_list<std::function<void()>> func_list;
 
 namespace coup {
 

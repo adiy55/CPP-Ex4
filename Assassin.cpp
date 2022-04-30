@@ -1,7 +1,3 @@
-//
-// Created by adiya on 4/25/2022.
-//
-
 #include "Assassin.hpp"
 
 namespace coup {
