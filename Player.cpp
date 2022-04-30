@@ -9,7 +9,7 @@ namespace coup {
 
 
     Player::Player(Game &game, const std::string &name)
-            : _name{name}, _game{game}, _coins{0} {}
+            : _game{game}, _name{name}, _coins{0} {}
 
     void Player::income() {}
 
