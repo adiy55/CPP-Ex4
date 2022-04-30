@@ -54,12 +54,13 @@ TEST_CASE ("Basic Functions") {
 
             SUBCASE("Check that order of players is the order of insertion in the game") {
         std::vector<std::string> players = game.players();
-                CHECK(players.size() == 5);
-                CHECK(players[0] == "Moshe");
-                CHECK(players[1] == "Yossi");
-                CHECK(players[2] == "Meirav");
-                CHECK(players[3] == "Reut");
-                CHECK(players[4] == "Gilad");
+        if (players.size() == 5) {
+                    CHECK(players[0] == "Moshe");
+                    CHECK(players[1] == "Yossi");
+                    CHECK(players[2] == "Meirav");
+                    CHECK(players[3] == "Reut");
+                    CHECK(players[4] == "Gilad");
+        }
     }
 }
 
