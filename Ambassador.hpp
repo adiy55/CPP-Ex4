@@ -8,17 +8,12 @@ namespace coup {
     class Ambassador : public Player {
 
     private:
-
         void validateTransfer(Player &from, Player &to) const;
 
-        using Player::coupCheckBalance;
-        using Player::getCoupPrice;
-        using Player::blockAction;
         using Player::getName;
         using Player::checkPositiveBalance;
         using Player::updateCoins;
         using Player::getExecutables;
-        using Player::turnWrapper;
 
     public:
 

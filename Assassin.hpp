@@ -8,16 +8,13 @@ namespace coup {
 
     class Assassin : public Player {
 
+    private:
         const int _assassin_coup_price{3};
 
-        using Player::coupCheckBalance;
-        using Player::getCoupPrice;
-        using Player::blockAction;
         using Player::getName;
         using Player::checkPositiveBalance;
         using Player::updateCoins;
         using Player::getExecutables;
-        using Player::turnWrapper;
 
     public:
 

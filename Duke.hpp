@@ -11,14 +11,12 @@ namespace coup {
 
     class Duke : public Player {
 
-        using Player::coupCheckBalance;
-        using Player::getCoupPrice;
-        using Player::blockAction;
+    private:
+
         using Player::getName;
         using Player::checkPositiveBalance;
         using Player::updateCoins;
         using Player::getExecutables;
-        using Player::turnWrapper;
 
     public:
 
