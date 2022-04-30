@@ -1,7 +1,3 @@
-//
-// Created by adiya on 4/26/2022.
-//
-
 #include "doctest.h"
 #include "Duke.hpp"
 #include "Assassin.hpp"
