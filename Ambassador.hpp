@@ -12,8 +12,14 @@ namespace coup {
     class Ambassador : public Player {
 
     private:
+        using Player::coupCheckBalance;
+        using Player::getCoupPrice;
+        using Player::blockAction;
+        using Player::getName;
         using Player::checkPositiveBalance;
         using Player::updateCoins;
+        using Player::getExecutables;
+        using Player::setupTurn;
 
     public:
 

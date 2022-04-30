@@ -13,7 +13,7 @@ namespace coup {
         return "Captain";
     }
 
-    void Captain::block(Player &player) {
+    void Captain::block(Player &player) { // todo: check this != player
         blockAction(player, BLOCK_STEAL);
     }
 

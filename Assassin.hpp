@@ -14,6 +14,15 @@ namespace coup {
 
         const int _assassin_coup_price{3};
 
+        using Player::coupCheckBalance;
+        using Player::getCoupPrice;
+        using Player::blockAction;
+        using Player::getName;
+        using Player::checkPositiveBalance;
+        using Player::updateCoins;
+        using Player::getExecutables;
+        using Player::setupTurn;
+
     public:
 
         Assassin(Game &game, const std::string &name);

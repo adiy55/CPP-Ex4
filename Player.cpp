@@ -42,9 +42,11 @@ namespace coup {
         this->updateCoins(-cost);
         int player_index = _game.removePlayer(player);
         if (player_index == -1) { throw std::runtime_error{"Could not find player to remove!"}; }
-        _executables[COUP_RECOVER_PLAYER] = {[&player, player_index] {
-            player._game.insertPlayer(player, player_index);
-        }};
+        if (this->role() == "Assassin") {
+            _executables[COUP_RECOVER_PLAYER] = {[&player, player_index] {
+                player._game.insertPlayer(player, player_index);
+            }};
+        }
     }
 
     /**

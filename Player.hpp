@@ -20,7 +20,7 @@ namespace coup {
     class Player {
     private:
 
-        const int _regular_coup_price{3};
+        const int _regular_coup_price{7};
 
     protected:
 
@@ -34,6 +34,8 @@ namespace coup {
         int coupCheckBalance() const;
 
         virtual int getCoupPrice() const;
+
+        static void blockAction(Player &p, int action);
 
     public:
 
@@ -58,8 +60,6 @@ namespace coup {
         func_map &getExecutables();
 
         void setupTurn();
-
-        static void blockAction(Player &p, int action);
 
     };
 
