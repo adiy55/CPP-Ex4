@@ -17,6 +17,7 @@ namespace coup {
     void Ambassador::transfer(Player &from, Player &to) {
         this->turnWrapper([this, &from, &to] {
             this->checkCoupNecessary();
+            this->validateTransfer(from, to);
             from.checkPositiveBalance();
             from.updateCoins(-1);
             to.updateCoins(1);
@@ -25,6 +26,10 @@ namespace coup {
 
     void Ambassador::block(Player &player) {
         blockAction(player, BLOCK_STEAL);
+    }
+
+    void Ambassador::validateTransfer(Player &from, Player &to) const {
+        if (this == &from || this == &to || &from == &to) { throw std::invalid_argument{"Invalid transfer!"}; }
     }
 
 }

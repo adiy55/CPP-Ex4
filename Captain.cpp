@@ -20,7 +20,7 @@ namespace coup {
     void Captain::steal(Player &player) {
         this->turnWrapper([this, &player] {
             this->checkCoupNecessary();
-            validateSteal(player);
+            this->validateSteal(player);
             player.updateCoins(-2);
             this->updateCoins(2);
             _executables[BLOCK_STEAL] = {[this, &player] {
@@ -31,9 +31,8 @@ namespace coup {
     }
 
     void Captain::validateSteal(Player &p) {
-        if (p.coins() < 2) {
-            throw std::invalid_argument{"Not enough coins to steal from player!"};
-        }
+        if (p.coins() < 2) { throw std::invalid_argument{"Not enough coins to steal from player!"}; }
+        if (this == &p) { throw std::invalid_argument{"Captain can not steal from himself!"}; }
     }
 
 }

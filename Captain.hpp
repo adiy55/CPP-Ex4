@@ -11,8 +11,7 @@ namespace coup {
 
     class Captain : public Player {
     private:
-
-        static void validateSteal(Player &p);
+        void validateSteal(Player &p);
 
         using Player::coupCheckBalance;
         using Player::getCoupPrice;
