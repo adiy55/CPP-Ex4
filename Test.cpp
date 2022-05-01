@@ -143,6 +143,26 @@ TEST_CASE ("Bad Input- Basic Player Actions") {
 
 }
 
+TEST_CASE ("Player from different game") {
+    Game game1{};
+    Contessa contessa{game1, "Gilad"};
+    Game game2{};
+
+            SUBCASE("Invalid - Duke blocks player from different game") {
+        Duke duke{game2, "Moshe"};
+        contessa.foreign_aid();
+                CHECK_THROWS(duke.block(contessa););
+    }
+
+            SUBCASE("Invalid - Assassin coups and Contessa blocks player from different game") {
+        Assassin assassin{game2, "Yossi"};
+        assassin.income();
+        assassin.foreign_aid();
+                CHECK_THROWS(assassin.coup(contessa););
+                CHECK_THROWS(contessa.block(assassin););
+    }
+}
+
 TEST_CASE ("Captain & Ambassador Tests") {
     Game game{};
     Duke duke{game, "Moshe"};
