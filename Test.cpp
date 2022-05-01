@@ -162,6 +162,10 @@ TEST_CASE ("Captain & Ambassador Tests") {
             duke.income();
             assassin.income();
                     CHECK_NOTHROW(ambassador.block(captain););
+
+                    SUBCASE("Invalid block- already blocked action") {
+                        CHECK_THROWS(ambassador.block(captain););
+            }
         }
     }
 
@@ -272,6 +276,10 @@ TEST_CASE ("Contessa Tests- can block Assassin coup") {
         ambassador.income();
         captain.income();
                 CHECK_NOTHROW(contessa.block(assassin););
+
+                SUBCASE("Invalid block- already blocked action") {
+                    CHECK_THROWS(contessa.block(assassin););
+        }
     }
 
             SUBCASE("Invalid block") {
@@ -320,6 +328,10 @@ TEST_CASE ("Duke Tests") {
 
             SUBCASE("Valid block") {
                 CHECK_NOTHROW(duke.block(captain););
+
+                SUBCASE("Invalid block- already blocked action") {
+                    CHECK_THROWS(duke.block(captain););
+        }
     }
 
             SUBCASE("Invalid block") {
