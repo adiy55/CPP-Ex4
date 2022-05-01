@@ -1,7 +1,6 @@
 #ifndef CPP_EX4_ASSASSIN_HPP
 #define CPP_EX4_ASSASSIN_HPP
 
-
 #include "Player.hpp"
 
 namespace coup {

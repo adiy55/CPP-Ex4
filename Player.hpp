@@ -11,10 +11,6 @@ typedef unsigned int uint;
 
 typedef std::unordered_map<int, std::function<void()>> func_map;
 
-typedef unsigned int uint;
-
-typedef std::unordered_map<int, std::function<void()>> func_map;
-
 namespace coup {
 
     class Game; // forward declaration (circular dependency)
