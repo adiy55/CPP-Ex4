@@ -41,6 +41,8 @@ namespace coup {
 
         uint basicCoup(Player &player);
 
+        void validateSameGame(std::initializer_list<std::reference_wrapper<Player>> players) const;
+
     public:
 
         void income();

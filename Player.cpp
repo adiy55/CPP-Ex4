@@ -52,12 +52,14 @@ namespace coup {
     // helper functions
 
     uint Player::basicCoup(Player &player) {
+        this->validateSameGame({player});
         int cost = this->coupCheckBalance();
         this->updateCoins(-cost);
         return _game.removePlayer(player);
     }
 
     void Player::blockAction(Player &p, int action) {
+        this->validateSameGame({p});
         if (this == &p) { throw std::invalid_argument{"Can not block yourself!"}; }
         func_map &executables = p.getExecutables();
         if (executables.count(action) != 1) { throw std::invalid_argument{"No action to remove!"}; }
@@ -70,6 +72,12 @@ namespace coup {
         if (!_executables.empty()) { _executables = {}; }
         func();
         _game.incrementTurn();
+    }
+
+    void Player::validateSameGame(std::initializer_list<std::reference_wrapper<Player>> players) const {
+        for (const Player &p: players) {
+            if (&p._game != &_game) { throw std::runtime_error{"Players are from different games!"}; }
+        }
     }
 
     void Player::checkCoupNecessary() const {
