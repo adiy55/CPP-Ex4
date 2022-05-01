@@ -58,6 +58,16 @@ TEST_CASE ("Basic Functions") {
                     CHECK(players[4] == "Gilad");
         }
     }
+
+            SUBCASE("No players in game") {
+        Game game2{};
+                CHECK_THROWS(game2.winner(););
+                CHECK_THROWS(game2.turn(););
+    }
+
+            SUBCASE("No winner- game has not ended") {
+                CHECK_THROWS(game.winner(););
+    }
 }
 
 TEST_CASE ("Bad Input- Basic Player Actions") {
@@ -246,7 +256,7 @@ TEST_CASE ("Ambassador Tests- can transfer coins between players") {
     }
 
             SUBCASE("Valid transfer- enough coins") {
-        ambassador.transfer(duke, captain);
+                CHECK_NOTHROW(ambassador.transfer(duke, captain););
     }
 }
 
