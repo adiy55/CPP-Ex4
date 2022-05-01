@@ -22,6 +22,8 @@ namespace coup {
 
         void checkWinner() const;
 
+        void checkPlayers() const;
+
     public:
 
         Game();

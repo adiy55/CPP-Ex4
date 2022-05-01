@@ -7,6 +7,7 @@ namespace coup {
             : _players{}, _player_idx{0} {}
 
     std::string Game::turn() {
+        this->checkPlayers();
         return _players[_player_idx].get().getName();
     }
 
@@ -17,7 +18,7 @@ namespace coup {
     }
 
     std::string Game::winner() {
-        Game::checkWinner();
+        this->checkWinner();
         return _players[0].get().getName();
     }
 
@@ -34,6 +35,10 @@ namespace coup {
 
     void Game::checkWinner() const {
         if (_players.size() > 1) { throw std::range_error{"The game has not ended!"}; }
+        this->checkPlayers();
+    }
+
+    void Game::checkPlayers() const {
         if (_players.empty()) { throw std::length_error{"There are no players in the game!"}; }
     }
 
