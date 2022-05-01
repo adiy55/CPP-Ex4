@@ -58,6 +58,16 @@ TEST_CASE ("Basic Functions") {
                     CHECK(players[4] == "Gilad");
         }
     }
+
+            SUBCASE("No players in game") {
+        Game game2{};
+                CHECK_THROWS(game2.winner(););
+                CHECK_THROWS(game2.turn(););
+    }
+
+            SUBCASE("No winner- game has not ended") {
+                CHECK_THROWS(game.winner(););
+    }
 }
 
 TEST_CASE ("Bad Input- Basic Player Actions") {
