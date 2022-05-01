@@ -43,7 +43,7 @@ namespace coup {
 
         void checkCoupNecessary() const;
 
-        uint basic_coup(Player &player);
+        uint basicCoup(Player &player);
 
     public:
 

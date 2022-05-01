@@ -15,7 +15,7 @@ namespace coup {
 
     void Assassin::coup(Player &player) {
         this->turnWrapper([this, &player] {
-            uint player_index = this->basic_coup(player);
+            uint player_index = this->basicCoup(player);
             _executables[COUP_RECOVER_PLAYER] = {[this, &player, player_index] {
                 _game.insertPlayer(player, player_index);
             }};

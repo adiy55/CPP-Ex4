@@ -38,7 +38,7 @@ namespace coup {
      */
     void Player::coup(Player &player) {
         this->turnWrapper([this, &player] {
-            this->basic_coup(player);
+            this->basicCoup(player);
         });
     }
 
@@ -51,7 +51,7 @@ namespace coup {
 
     // helper functions
 
-    uint Player::basic_coup(Player &player) {
+    uint Player::basicCoup(Player &player) {
         int cost = this->coupCheckBalance();
         this->updateCoins(-cost);
         return _game.removePlayer(player);
