@@ -256,7 +256,7 @@ TEST_CASE ("Ambassador Tests- can transfer coins between players") {
     }
 
             SUBCASE("Valid transfer- enough coins") {
-        ambassador.transfer(duke, captain);
+                CHECK_NOTHROW(ambassador.transfer(duke, captain););
     }
 }
 
