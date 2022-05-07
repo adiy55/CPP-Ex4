@@ -1,0 +1,73 @@
+#ifndef CPP_EX4_PLAYER_HPP
+#define CPP_EX4_PLAYER_HPP
+
+#include <string>
+#include <vector>
+#include <functional>
+#include "Game.hpp"
+#include "Constants.hpp"
+
+typedef unsigned int uint;
+
+typedef std::unordered_map<int, std::function<void()>> func_map;
+
+namespace coup {
+
+    class Game; // forward declaration (circular dependency)
+
+    class Player {
+    private:
+
+        const int _regular_coup_price{7};
+
+    protected:
+
+        Game &_game;
+        std::string _name;
+        int _coins;
+        func_map _executables;
+
+        Player(Game &game, const std::string &name);
+
+        int coupCheckBalance() const;
+
+        virtual int getCoupPrice() const;
+
+        void blockAction(Player &p, int action);
+
+        void turnWrapper(const std::function<void()> &function);
+
+        void checkCoupNecessary() const;
+
+        uint basicCoup(Player &player);
+
+        void validateSameGame(std::initializer_list<std::reference_wrapper<Player>> players) const;
+
+    public:
+
+        void income();
+
+        void foreign_aid();
+
+        virtual void coup(Player &player);
+
+        virtual std::string role() const = 0;
+
+        int coins() const;
+
+        // helper functions
+
+        std::string getName() const;
+
+        void checkPositiveBalance() const;
+
+        void updateCoins(int coins);
+
+        func_map &getExecutables();
+
+    };
+
+}
+
+
+#endif //CPP_EX4_PLAYER_HPP
