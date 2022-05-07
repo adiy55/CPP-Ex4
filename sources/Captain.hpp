@@ -8,7 +8,7 @@ namespace coup {
     class Captain : public Player {
 
     private:
-        void validateSteal(Player &p);
+        int validateSteal(Player &p);
 
         using Player::getName;
         using Player::checkPositiveBalance;
