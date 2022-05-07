@@ -1,10 +1,10 @@
 #include "doctest.h"
-#include "Duke.hpp"
-#include "Assassin.hpp"
-#include "Ambassador.hpp"
-#include "Captain.hpp"
-#include "Contessa.hpp"
-#include "Game.hpp"
+#include "sources/Duke.hpp"
+#include "sources/Assassin.hpp"
+#include "sources/Ambassador.hpp"
+#include "sources/Captain.hpp"
+#include "sources/Contessa.hpp"
+#include "sources/Game.hpp"
 
 using namespace coup;
 
