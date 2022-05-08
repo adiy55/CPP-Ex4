@@ -16,16 +16,16 @@ namespace coup {
     class Game; // forward declaration (circular dependency)
 
     class Player {
-    private:
-
-        const int _regular_coup_price{7};
 
     protected:
+
+        const int _regular_coup_price{7};
 
         Game &_game;
         std::string _name;
         int _coins;
         func_map _executables;
+        bool _is_in_game;
 
         Player(Game &game, const std::string &name);
 
@@ -41,7 +41,9 @@ namespace coup {
 
         uint basicCoup(Player &player);
 
-        void validateSameGame(std::initializer_list<std::reference_wrapper<Player>> players) const;
+        void validatePlayersInGame(std::initializer_list<std::reference_wrapper<Player>> players) const;
+
+        void checkInGame() const;
 
     public:
 
@@ -64,6 +66,8 @@ namespace coup {
         void updateCoins(int coins);
 
         func_map &getExecutables();
+
+        void setInGame();
 
     };
 

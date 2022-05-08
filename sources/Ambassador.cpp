@@ -25,8 +25,8 @@ namespace coup {
     }
 
     void Ambassador::validateTransfer(Player &from, Player &to) const {
-        this->validateSameGame({from, to});
-        if (this == &from || this == &to || &from == &to) { throw std::invalid_argument{"Invalid transfer!"}; }
+        this->validatePlayersInGame({from, to});
+        if (this == &from || &from == &to) { throw std::invalid_argument{"Invalid transfer!"}; }
     }
 
 }

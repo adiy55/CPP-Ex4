@@ -27,7 +27,7 @@ namespace coup {
     }
 
     int Captain::validateSteal(Player &p) {
-        this->validateSameGame({p});
+        this->validatePlayersInGame({p});
         if (this == &p) { throw std::invalid_argument{"Captain can not steal from himself!"}; }
         int n_coins = p.coins();
         if(n_coins > 2) n_coins = 2;

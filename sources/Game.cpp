@@ -4,10 +4,11 @@
 namespace coup {
 
     Game::Game()
-            : _players{}, _player_idx{0} {}
+            : _players{}, _player_idx{0}, _is_started{false} {}
 
     std::string Game::turn() {
-        this->checkPlayers();
+        if (_players.size() <= 1) { throw std::length_error{"Not enough players in the game!"}; }
+        _is_started = true;
         return _players[_player_idx].get().getName();
     }
 
@@ -25,21 +26,31 @@ namespace coup {
     // helper functions
 
     void Game::insertPlayer(Player &p) {
+        this->checkInsert();
+        if (_is_started) { throw std::runtime_error{"Game has started!"}; }
         _players.emplace_back(p); // emplace back constructs an object into the vector container
         // in this case the object is: std::reference_wrapper<Player>
     }
 
     void Game::insertPlayer(Player &p, uint index) {
+        this->checkInsert();
+        this->checkNotStarted();
         _players.insert(_players.begin() + index, p);
+        if (_player_idx >= index) { ++_player_idx; }
     }
 
     void Game::checkWinner() const {
         if (_players.size() > 1) { throw std::range_error{"The game has not ended!"}; }
-        this->checkPlayers();
+        if (_players.empty()) { throw std::length_error{"There are no players in the game!"}; }
+        this->checkNotStarted();
     }
 
-    void Game::checkPlayers() const {
-        if (_players.empty()) { throw std::length_error{"There are no players in the game!"}; }
+    void Game::checkNotStarted() const {
+        if (!_is_started) { throw std::runtime_error{"Game has not started!"}; }
+    }
+
+    void Game::checkInsert() const {
+        if (_players.size() > 5) { throw std::length_error{"Too many players in the game!"}; }
     }
 
     uint Game::removePlayer(Player &p) {

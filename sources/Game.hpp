@@ -20,9 +20,13 @@ namespace coup {
 
         uint _player_idx;
 
+        bool _is_started;
+
         void checkWinner() const;
 
-        void checkPlayers() const;
+        void checkInsert() const;
+
+        void checkNotStarted() const;
 
     public:
 
