@@ -1,6 +1,8 @@
 #include <stdexcept>
 #include "Ambassador.hpp"
 
+using namespace constants;
+
 namespace coup {
 
     Ambassador::Ambassador(Game &game, const std::string &name)

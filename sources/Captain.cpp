@@ -1,5 +1,7 @@
 #include "Captain.hpp"
 
+using namespace constants;
+
 namespace coup {
 
     Captain::Captain(Game &game, const std::string &name)
@@ -30,7 +32,7 @@ namespace coup {
         this->validatePlayersInGame({p});
         if (this == &p) { throw std::invalid_argument{"Captain can not steal from himself!"}; }
         int n_coins = p.coins();
-        if(n_coins > 2) n_coins = 2;
+        if (n_coins > MAX_STEAL_PRICE) { n_coins = MAX_STEAL_PRICE; }
         return n_coins;
     }
 

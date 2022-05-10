@@ -1,5 +1,7 @@
 #include "Contessa.hpp"
 
+using namespace constants;
+
 namespace coup {
 
     Contessa::Contessa(Game &game, const std::string &name)

@@ -10,6 +10,8 @@
 typedef unsigned int uint;
 
 typedef std::unordered_map<int, std::function<void()>> func_map;
+// callables are implicitly converted to std::function
+// lambda is not a type std::function
 
 namespace coup {
 
@@ -18,8 +20,6 @@ namespace coup {
     class Player {
 
     protected:
-
-        const int _regular_coup_price{7};
 
         Game &_game;
         std::string _name;

@@ -5,8 +5,17 @@
 #include <string>
 #include <functional>
 #include "Player.hpp"
+#include "Constants.hpp"
 
 typedef unsigned int uint;
+
+/**
+ * "std::reference_wrapper is a class template that wraps a reference in a copyable, assignable object.
+ * It is frequently used as a mechanism to store references inside standard containers (like std::vector)
+ * which cannot normally hold references."
+ * https://en.cppreference.com/w/cpp/utility/functional/reference_wrapper
+ * The method "get" is used to access the stored reference.
+ */
 
 namespace coup {
 
@@ -17,9 +26,7 @@ namespace coup {
     private:
 
         std::vector<std::reference_wrapper<Player>> _players;
-
         uint _player_idx;
-
         bool _is_started;
 
         void checkWinner() const;

@@ -1,6 +1,8 @@
 #include <stdexcept>
 #include "Game.hpp"
 
+using constants::MAX_PLAYERS;
+
 namespace coup {
 
     Game::Game()
@@ -50,7 +52,7 @@ namespace coup {
     }
 
     void Game::checkInsert() const {
-        if (_players.size() > 5) { throw std::length_error{"Too many players in the game!"}; }
+        if (_players.size() > MAX_PLAYERS) { throw std::length_error{"Too many players in the game!"}; }
     }
 
     uint Game::removePlayer(Player &p) {

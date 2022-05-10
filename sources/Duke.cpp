@@ -1,5 +1,7 @@
 #include "Duke.hpp"
 
+using namespace constants;
+
 namespace coup {
 
     Duke::Duke(Game &game, const std::string &name)

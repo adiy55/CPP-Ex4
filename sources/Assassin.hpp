@@ -8,7 +8,6 @@ namespace coup {
     class Assassin : public Player {
 
     private:
-        const int _assassin_coup_price{3};
 
         using Player::getName;
         using Player::checkPositiveBalance;

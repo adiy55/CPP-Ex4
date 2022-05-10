@@ -2,6 +2,8 @@
 #include "Player.hpp"
 #include "Game.hpp"
 
+using namespace constants;
+
 typedef std::unordered_map<int, std::function<void()>> func_map;
 
 namespace coup {
@@ -9,7 +11,7 @@ namespace coup {
     Player::Player(Game &game, const std::string &name)
             : _game{game}, _name{name}, _coins{0}, _is_in_game{false} {
         _game.insertPlayer(*this);
-        _is_in_game = true;
+        _is_in_game = true; // update only after successful insertion
     }
 
     /**
@@ -57,9 +59,14 @@ namespace coup {
         int cost = this->coupCheckBalance();
         this->updateCoins(-cost);
         player._is_in_game = false;
-        return _game.removePlayer(player);
+        return _game.removePlayer(player); // return player index for recovery (in Assassin)
     }
 
+    /**
+     * Function checks for a valid executable function and reverses an action.
+     * @param p reference to player that is blocked
+     * @param action enum from Constants.hpp
+     */
     void Player::blockAction(Player &p, int action) {
         this->validatePlayersInGame({p});
         if (this == &p) { throw std::invalid_argument{"Can not block yourself!"}; }
@@ -69,6 +76,10 @@ namespace coup {
         executables.erase(action);
     }
 
+    /**
+     * Wrapper function for validation before executing the function and incrementing the turn after.
+     * @param func method the player called
+     */
     void Player::turnWrapper(const std::function<void()> &func) {
         this->checkInGame();
         if (_name != _game.turn()) { throw std::runtime_error{"Not your turn!"}; }
@@ -77,6 +88,9 @@ namespace coup {
         _game.incrementTurn();
     }
 
+    /**
+     * @param players initializer list
+     */
     void Player::validatePlayersInGame(std::initializer_list<std::reference_wrapper<Player>> players) const {
         for (const Player &p: players) {
             if (&p._game != &_game) { throw std::runtime_error{"Players are from different games!"}; }
@@ -85,7 +99,7 @@ namespace coup {
     }
 
     void Player::checkCoupNecessary() const {
-        if (_coins > 10) { throw std::runtime_error{"Player has to coup! Has 10 or more coins!"}; }
+        if (_coins > MAX_COINS_COUP) { throw std::runtime_error{"Player has to coup! Has 10 or more coins!"}; }
     }
 
     int Player::coupCheckBalance() const {
@@ -95,11 +109,11 @@ namespace coup {
     }
 
     int Player::getCoupPrice() const {
-        return _regular_coup_price;
+        return REGULAR_COUP_PRICE;
     }
 
     void Player::checkPositiveBalance() const {
-        if (_coins < 1) { throw std::logic_error{"Not enough coins!"}; }
+        if (_coins <= MIN_COINS) { throw std::logic_error{"Not enough coins!"}; }
     }
 
     void Player::updateCoins(int coins) {
