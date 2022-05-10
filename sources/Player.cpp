@@ -7,7 +7,7 @@ typedef std::unordered_map<int, std::function<void()>> func_map;
 namespace coup {
 
     Player::Player(Game &game, const std::string &name)
-            : _game{game}, _name{name}, _coins{0}, _executables{}, _is_in_game{false} {
+            : _game{game}, _name{name}, _coins{0}, _is_in_game{false} {
         _game.insertPlayer(*this);
         _is_in_game = true;
     }

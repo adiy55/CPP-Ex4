@@ -4,7 +4,7 @@
 namespace coup {
 
     Game::Game()
-            : _players{}, _player_idx{0}, _is_started{false} {}
+            : _player_idx{0}, _is_started{false} {}
 
     std::string Game::turn() {
         if (_players.size() <= 1) { throw std::length_error{"Not enough players in the game!"}; }
